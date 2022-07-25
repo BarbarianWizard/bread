@@ -10,6 +10,8 @@ const app = express()
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
+// MIDDLEWARE
+app.use(express.static('public'))
 
 
 // ROUTES
@@ -21,6 +23,12 @@ app.get('/', (req, res) => {
   const breadsController = require('./controllers/breads_controller.js')
   app.use('/breads', breadsController)
   
+// 404 Page
+app.get('*', (req, res) => {
+  res.send('404 Bread not found =(')
+})
+
+
 // LISTEN
 app.listen(PORT, () => {
   console.log('listening on port', PORT);
