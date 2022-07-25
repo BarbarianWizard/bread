@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
   
 // 404 Page
 app.get('*', (req, res) => {
-  res.send('404 Bread not found =(')
+  res.send('404')
 })
 
 
