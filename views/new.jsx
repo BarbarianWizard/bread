@@ -1,15 +1,11 @@
 const React = require('react')
 const Default = require('./layouts/Default')
 
-function New () {
+function New ({bakers}) {
     return (
       <Default>
         <h2>Add a new bread</h2>
-        <div className="backButton">
-  <a href="/breads"><button>Go back to the index</button></a>
-</div>
-
-        <form action="/breads" method="POST">
+         <form action="/breads" method="POST">
           <label htmlFor="name">Name</label>
           <input
             type="text"
@@ -22,6 +18,16 @@ function New () {
             type="text"
             name="image"
             id="image"/>
+            <label htmlFor="baker">Baker</label>
+<select name="baker" id="baker">
+  {bakers.map((baker) => {
+    return(
+      <option value={baker.id} key={baker.id}>{baker.name}</option>
+    )
+  })}
+  
+</select>
+
           <label htmlFor="hasGluten">Has Gluten?</label>
           <input
             type="checkbox"
@@ -33,7 +39,9 @@ function New () {
           <input type="submit"/>
           
         </form>
-        
+        <div className="backButton">
+  <a href="/breads"><button>Go back to the index</button></a>
+</div>
       </Default>
     )
 }
