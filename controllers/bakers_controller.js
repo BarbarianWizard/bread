@@ -1,8 +1,19 @@
 // dependencies
 const express = require('express')
 const baker = express.Router()
-const Baker = require('../models/bakers.js')
+const Baker = require('../models/baker.js')
 const bakerSeedData = require('../models/baker_seed')
+
+// Index: 
+baker.get('/', (req, res) => {
+    Baker.find()
+    .populate('breads')
+        .then(foundBakers => {
+            res.send(foundBakers)
+        })
+})                    
+
+
 
 // Route
 baker.get('/data/seed', (req, res) => {
@@ -10,6 +21,16 @@ baker.get('/data/seed', (req, res) => {
         .then(res.redirect('/breads'))
 })
 
+// Show: 
+baker.get('/:id', (req, res) => {
+    Baker.findById(req.params.id)
+        .populate('breads')
+        .then(foundBaker => {
+            res.render('bakerShow', {
+                baker: foundBaker
+            })
+        })
+})
 
 
 
