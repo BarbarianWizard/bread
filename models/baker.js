@@ -17,20 +17,21 @@ const bakerSchema = new Schema({
     bio: String
 }, {toJSON: {virtuals: true }})
 
-//Virtuals:
+// Virtuals
 bakerSchema.virtual('breads', {ref: 'Bread',
 localField: 'id',
 foreignField: 'baker'
 })
  
-/* hooks 
+// Hooks 
 bakerSchema.post('findOneAndDelete', function() {
     Bread.deleteMany({ baker: this._conditions._id })
         .then(deleteStatus => {
             console.log(deleteStatus)
         })
-})
-*/
+  })
+  
+
 
 // model and export
 const Baker = mongoose.model('Baker', bakerSchema)
